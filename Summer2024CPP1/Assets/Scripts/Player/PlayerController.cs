@@ -56,16 +56,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Create a small overlap collider to check if we are touching the ground
-        if (!isGrounded)
-        {
-            if (rb.velocity.y <= 0)
-            {
-                isGrounded = IsGrounded();
-            }
-        }
-        else
-            isGrounded = IsGrounded();
-       
+        IsGrounded();
 
 
         //grab horizontal axis - Check Project Settings > Input Manager to see the inputs defined
@@ -88,8 +79,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    bool IsGrounded()
+    void IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+        if (!isGrounded)
+        {
+            if (rb.velocity.y <= 0)
+            {
+                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+            }
+        }
+        else
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
     }
 }
