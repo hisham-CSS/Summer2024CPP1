@@ -55,19 +55,44 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AnimatorClipInfo[] curPlayingClips = anim.GetCurrentAnimatorClipInfo(0);
+        //grab horizontal axis - Check Project Settings > Input Manager to see the inputs defined
+        float hInput = Input.GetAxis("Horizontal");
+
         //Create a small overlap collider to check if we are touching the ground
         IsGrounded();
 
 
-        //grab horizontal axis - Check Project Settings > Input Manager to see the inputs defined
-        float hInput = Input.GetAxis("Horizontal");
+        //Animation check for our physics
+        if (curPlayingClips.Length > 0)
+        {
+            if (curPlayingClips[0].clip.name == "Attack")
+            {
+                if (isGrounded)
+                    rb.velocity = Vector2.zero;
+                //new Vector2(0, rb.velocity.y);
+            }
+            else
+                rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
+        }
 
-
-        rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
-
+        
+        //Button Input Checks
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (!isGrounded && curPlayingClips[0].clip.name != "JumpAttack")
+            {
+                anim.SetTrigger("JumpAttack");
+            }
+            else if (!curPlayingClips[0].clip.name.Contains("Attack"))
+            {
+                anim.SetTrigger("Fire");
+            }
         }
 
         //Sprite Flipping
@@ -78,7 +103,10 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isGrounded", isGrounded);
 
     }
-
+    
+    /// <summary>
+    /// This function is used to check if we are grounded.  When we jump - we disable checking if we are grounded until our velocity reaches negative on the y-axis - this indicates that we are falling and we should start to check if we are grounded again. This is done to prevent us flipping to grounded when we jump through a platform.
+    /// </summary>
     void IsGrounded()
     {
         if (!isGrounded)
@@ -90,5 +118,10 @@ public class PlayerController : MonoBehaviour
         }
         else
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+    }
+
+    void IncreaseGravity()
+    {
+        rb.gravityScale = 10;
     }
 }
