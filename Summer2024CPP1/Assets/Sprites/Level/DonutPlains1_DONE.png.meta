@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DonutPlains1_DONE_0
+      name: YoshiCoin
       rect:
         serializedVersion: 2
         x: 19
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DonutPlains1_DONE_1
+      name: Coin
       rect:
         serializedVersion: 2
         x: 64
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DonutPlains1_DONE_2
+      name: 1up
       rect:
         serializedVersion: 2
         x: 241
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DonutPlains1_DONE_0: -1160441969
-      DonutPlains1_DONE_1: -7115605
-      DonutPlains1_DONE_2: 904413621
+      1up: 904413621
+      Coin: -7115605
       Level: 342073927
+      YoshiCoin: -1160441969
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
