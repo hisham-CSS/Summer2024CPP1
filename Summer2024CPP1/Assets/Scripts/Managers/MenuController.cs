@@ -30,6 +30,7 @@ public class MenuController : MonoBehaviour
         }
 
         SetActiveState(initialState);
+        GameManager.Instance.SetMenuController(this);
     }
     public void JumpBack()
     {
@@ -43,6 +44,7 @@ public class MenuController : MonoBehaviour
     public void SetActiveState(MenuStates newState, bool isJumpingBack = false)
     {
         if (!menuDictionary.ContainsKey(newState)) return;
+        if (currentState == menuDictionary[newState]) return;
 
         if (currentState != null)
         {

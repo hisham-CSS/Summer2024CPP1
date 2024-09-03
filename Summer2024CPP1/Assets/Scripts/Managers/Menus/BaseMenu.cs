@@ -22,6 +22,15 @@ public class BaseMenu : MonoBehaviour
         context.JumpBack();
     }
 
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+    }
+
     public void SetNextMenu(MenuController.MenuStates newState)
     {
         context.SetActiveState(newState);

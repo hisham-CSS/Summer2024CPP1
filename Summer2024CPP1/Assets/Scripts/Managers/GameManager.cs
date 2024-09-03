@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance => instance;
+
+    public Action<int> OnLifeValueChanged;
+    //public UnityEvent<int> OnLifeValueChanged;
 
     //Private Lives Variable
     private int _lives = 10;
@@ -38,6 +42,7 @@ public class GameManager : MonoBehaviour
             }
 
             _lives = value;
+            OnLifeValueChanged?.Invoke(_lives);
 
             Debug.Log($"Lives value on {gameObject.name} has changed to {lives}");
         }
@@ -50,6 +55,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public PlayerController PlayerInstance => playerInstance;
     private PlayerController playerInstance;
     private Transform currentCheckpoint;
+    private MenuController currentMenuController;
 
     private void Awake()
     {
@@ -74,6 +80,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!currentMenuController) return;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            currentMenuController.SetActiveState(MenuController.MenuStates.Pause);
+        }
+            
+
+
         //if (Input.GetKeyDown(KeyCode.Escape))
         //{
         //    if (SceneManager.GetActiveScene().name == "Title")
@@ -109,5 +124,10 @@ public class GameManager : MonoBehaviour
     public void UpdateCheckpoint(Transform updatedCheckpoint)
     {
         currentCheckpoint = updatedCheckpoint;
+    }
+
+    public void SetMenuController(MenuController menuController)
+    {
+        currentMenuController = menuController;
     }
 }

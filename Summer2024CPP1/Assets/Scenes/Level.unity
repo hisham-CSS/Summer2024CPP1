@@ -1775,6 +1775,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  resumeGame: {fileID: 1554501607}
+  returnToMenu: {fileID: 1411021282}
+  quitGame: {fileID: 558547761}
 --- !u!224 &1642090303
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1827,6 +1830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  livesText: {fileID: 1856796706}
 --- !u!224 &1769916824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2432,6 +2436,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2593243661772708300, guid: e77d120354ffc4742a23b861681d2754, type: 3}
+      propertyPath: OnLifeValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593243661772708300, guid: e77d120354ffc4742a23b861681d2754, type: 3}
+      propertyPath: OnLifeValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1769916822}
+    - target: {fileID: 2593243661772708300, guid: e77d120354ffc4742a23b861681d2754, type: 3}
+      propertyPath: OnLifeValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4209778447798368639, guid: e77d120354ffc4742a23b861681d2754, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.4844265
