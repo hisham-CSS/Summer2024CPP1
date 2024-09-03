@@ -74,14 +74,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (SceneManager.GetActiveScene().name == "Title")
-                SceneManager.LoadScene("Level");
-            else
-                SceneManager.LoadScene("Title");
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (SceneManager.GetActiveScene().name == "Title")
+        //        SceneManager.LoadScene("Level");
+        //    else
+        //        SceneManager.LoadScene("Title");
+        //}
 
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     void GameOver()
