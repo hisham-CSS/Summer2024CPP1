@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51b9d7f54be84d499fd15138e4a5745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SFXGroup: {fileID: 3650648022090895170, guid: 2c1a999663b05fb44bd84ee6989151d4, type: 2}
+  MusicGroup: {fileID: -3329651140470544881, guid: 2c1a999663b05fb44bd84ee6989151d4, type: 2}
   maxLives: 10
   playerPrefab: {fileID: 5302060621156463909, guid: b00fb9b679ad5fa47bde3aca602ba75a, type: 3}

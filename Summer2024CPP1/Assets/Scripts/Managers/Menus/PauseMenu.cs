@@ -17,4 +17,16 @@ public class PauseMenu : BaseMenu
         returnToMenu.onClick.AddListener(() => GameManager.Instance.LoadScene("Title"));
         quitGame.onClick.AddListener(QuitGame);
     }
+
+    public override void EnterState()
+    {
+        base.EnterState();
+        Time.timeScale = 0.0f;
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+        Time.timeScale = 1.0f;
+    }
 }

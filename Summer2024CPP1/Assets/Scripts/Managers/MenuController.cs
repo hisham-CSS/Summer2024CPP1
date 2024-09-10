@@ -16,7 +16,10 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (allMenus == null) return;
+        if (allMenus.Length <= 0)
+        {
+            allMenus = gameObject.GetComponentsInChildren<BaseMenu>(true);
+        }
 
         foreach (BaseMenu menu in allMenus)
         {

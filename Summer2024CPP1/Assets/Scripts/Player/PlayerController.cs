@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     //Player gameplay variables
@@ -70,6 +72,11 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     Animator anim;
+    AudioSource audioSource;
+
+    //Audio Clip references
+    [SerializeField] private AudioClip jumpClip;
+    [SerializeField] private AudioClip stompClip;
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +85,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.outputAudioMixerGroup = GameManager.Instance.SFXGroup;
 
         //Checking values to ensure non garbage data
         if (speed <= 0)
@@ -106,6 +116,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;
+
+
         AnimatorClipInfo[] curPlayingClips = anim.GetCurrentAnimatorClipInfo(0);
         //grab horizontal axis - Check Project Settings > Input Manager to see the inputs defined
         float hInput = Input.GetAxis("Horizontal");
@@ -127,11 +140,12 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
         }
 
-        
+
         //Button Input Checks
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            audioSource.PlayOneShot(jumpClip);
         }
 
         if (Input.GetButtonDown("Fire1"))
@@ -152,7 +166,6 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat("hInput", Mathf.Abs(hInput));
         anim.SetBool("isGrounded", isGrounded);
-
     }
     
     /// <summary>
@@ -191,6 +204,7 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.GetComponentInParent<Enemy>().TakeDamage(9999);
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            audioSource.PlayOneShot(stompClip);
         }
     }
 }

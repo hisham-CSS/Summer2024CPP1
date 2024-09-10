@@ -1479,9 +1479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a8ed6dcd574e749bbc20b9e49839a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allMenus:
-  - {fileID: 1769916823}
-  - {fileID: 1642090302}
+  allMenus: []
   initialState: 3
 --- !u!114 &1508502204
 MonoBehaviour:
@@ -1540,8 +1538,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2436,18 +2434,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2593243661772708300, guid: e77d120354ffc4742a23b861681d2754, type: 3}
-      propertyPath: OnLifeValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593243661772708300, guid: e77d120354ffc4742a23b861681d2754, type: 3}
-      propertyPath: OnLifeValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1769916822}
-    - target: {fileID: 2593243661772708300, guid: e77d120354ffc4742a23b861681d2754, type: 3}
-      propertyPath: OnLifeValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4209778447798368639, guid: e77d120354ffc4742a23b861681d2754, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.4844265
