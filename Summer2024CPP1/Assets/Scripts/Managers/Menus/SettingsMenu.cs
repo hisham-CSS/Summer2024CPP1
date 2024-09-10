@@ -36,14 +36,14 @@ public class SettingsMenu : BaseMenu
         float newVal = (mySlider.value == 0.0f) ? -80.0f : 20.0f * Mathf.Log10(mySlider.value);
         mixer.SetFloat(parameterName, newVal);
 
-        myText.text = (newVal == -80.0f) ? "0%" : (int)(mySlider.value * 10) + "%"; 
+        myText.text = (newVal == -80.0f) ? "0%" : (int)(mySlider.value * 100) + "%"; 
     }
 
     void OnSliderValueChanged(float value, TMP_Text myText, string parameterName, Slider mySlider)
     {
         value = (value == 0.0f) ? -80.0f : 20.0f * Mathf.Log10(value);
 
-        myText.text = (value == -80.0f) ? "0%" : (int)(mySlider.value * 10) + "%";
+        myText.text = (value == -80.0f) ? "0%" : (int)(mySlider.value * 100) + "%";
 
         mixer.SetFloat(parameterName, value);
     }
