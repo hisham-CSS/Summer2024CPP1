@@ -45,5 +45,7 @@ public class Shoot : MonoBehaviour
             curProjectile.SetVelocity(-xVel, yVel);
         }
         if (fireSound) audioSource.PlayOneShot(fireSound);
+
+        Debug.LogError("Projectile Fired");
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//this is fine in a small scope - but it is hard to scale.
 [RequireComponent(typeof(SpriteRenderer), (typeof(AudioSource)))]
 public class Pickup : MonoBehaviour
 {

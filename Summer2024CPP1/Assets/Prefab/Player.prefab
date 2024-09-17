@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 9187224658265813489}
   - component: {fileID: 5805123001694576334}
   - component: {fileID: 2080785548661781211}
+  - component: {fileID: 3225051813059698386}
+  - component: {fileID: -6069740832770613269}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -182,10 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 10
-  groundCheckRadius: 0.06
-  isGroundLayer:
-    serializedVersion: 2
-    m_Bits: 8
   jumpClip: {fileID: 8300000, guid: b5c2f9fe3f80aa44b98a4fa533cb0dcc, type: 3}
   stompClip: {fileID: 8300000, guid: 0faf468bacc2a864a9d0045201a7d280, type: 3}
 --- !u!50 &7977471029706972853
@@ -203,7 +201,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2.59
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -350,6 +348,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3225051813059698386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2949461019306865641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c35d16b5735b424c81d7739e1b3dd70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 0.02
+  isGroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &-6069740832770613269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2949461019306865641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539510c4bee067c4d8a89534522ef969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 5
+  jumpFallForce: 100
 --- !u!1 &8802632242199537391
 GameObject:
   m_ObjectHideFlags: 0

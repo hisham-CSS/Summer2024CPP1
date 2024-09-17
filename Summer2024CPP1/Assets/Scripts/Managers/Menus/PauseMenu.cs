@@ -29,4 +29,16 @@ public class PauseMenu : BaseMenu
         base.ExitState();
         Time.timeScale = 1.0f;
     }
+
+    private void OnDisable()
+    {
+        resumeGame.onClick.RemoveListener(JumpBack);
+        quitGame.onClick.RemoveListener(QuitGame);
+    }
+
+    private void OnDestory()
+    {
+        resumeGame.onClick.RemoveListener(JumpBack);
+        quitGame.onClick.RemoveListener(QuitGame);
+    }
 }

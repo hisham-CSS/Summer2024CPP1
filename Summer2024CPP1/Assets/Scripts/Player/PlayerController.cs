@@ -1,9 +1,10 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource), typeof(GroundCheck))]
 public class PlayerController : MonoBehaviour
 {
     //Player gameplay variables
@@ -61,18 +62,18 @@ public class PlayerController : MonoBehaviour
     //Movement Variables
     [SerializeField, Range(1, 20)] private float speed = 5;
     [SerializeField, Range(1, 20)] private float jumpForce = 10;
-    [SerializeField, Range(0.01f, 1)] private float groundCheckRadius = 0.02f;
-    [SerializeField] private LayerMask isGroundLayer;
+    
 
     //GroundCheck Stuff
-    private Transform groundCheck;
     private bool isGrounded = false;
+    public bool IsGrounded => isGrounded;
 
     //Component References
     Rigidbody2D rb;
     SpriteRenderer sr;
     Animator anim;
     AudioSource audioSource;
+    GroundCheck gndChk;
 
     //Audio Clip references
     [SerializeField] private AudioClip jumpClip;
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        gndChk = GetComponent<GroundCheck>();
 
         audioSource.outputAudioMixerGroup = GameManager.Instance.SFXGroup;
 
@@ -94,22 +96,6 @@ public class PlayerController : MonoBehaviour
         {
             speed = 5;
             Debug.Log("Speed was set incorrectly");
-        }
-
-        if (jumpForce <= 0)
-        {
-            jumpForce = 10;
-            Debug.Log("JumpForce was set incorrectly");
-        }
-        
-        //Creating groundcheck object
-        if (!groundCheck)
-        {
-            GameObject obj = new GameObject();
-            obj.transform.SetParent(transform);
-            obj.transform.localPosition = Vector3.zero;
-            obj.name = "GroundCheck";
-            groundCheck = obj.transform;
         }
     }
 
@@ -124,7 +110,7 @@ public class PlayerController : MonoBehaviour
         float hInput = Input.GetAxis("Horizontal");
 
         //Create a small overlap collider to check if we are touching the ground
-        IsGrounded();
+        CheckIsGrounded();
 
 
         //Animation check for our physics
@@ -142,11 +128,6 @@ public class PlayerController : MonoBehaviour
 
 
         //Button Input Checks
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            audioSource.PlayOneShot(jumpClip);
-        }
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -171,17 +152,17 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// This function is used to check if we are grounded.  When we jump - we disable checking if we are grounded until our velocity reaches negative on the y-axis - this indicates that we are falling and we should start to check if we are grounded again. This is done to prevent us flipping to grounded when we jump through a platform.
     /// </summary>
-    void IsGrounded()
+    void CheckIsGrounded()
     {
         if (!isGrounded)
         {
             if (rb.velocity.y <= 0)
             {
-                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+                isGrounded = gndChk.IsGrounded();
             }
         }
         else
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+            isGrounded = gndChk.IsGrounded();
     }
 
     void IncreaseGravity()
@@ -195,6 +176,12 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.lives--;
         }
+
+        IPickup pickup = collision.gameObject.GetComponent<IPickup>();
+        if (pickup != null)
+        {
+            pickup.Pickup(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -205,6 +192,12 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             audioSource.PlayOneShot(stompClip);
+        }
+
+        IPickup pickup = collision.gameObject.GetComponent<IPickup>();
+        if (pickup != null)
+        {
+            pickup.Pickup(gameObject);
         }
     }
 }

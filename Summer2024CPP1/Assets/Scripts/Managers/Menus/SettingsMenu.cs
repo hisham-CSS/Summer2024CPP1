@@ -47,4 +47,14 @@ public class SettingsMenu : BaseMenu
 
         mixer.SetFloat(parameterName, value);
     }
+
+    private void OnDisable()
+    {
+        backButton.onClick.RemoveListener(JumpBack);
+    }
+
+    private void OnDestory()
+    {
+        backButton.onClick.RemoveListener(JumpBack);
+    }
 }
