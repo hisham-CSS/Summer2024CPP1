@@ -10,7 +10,6 @@ public class Jump : MonoBehaviour
     Rigidbody2D rb;
     PlayerController pc;
 
-    float timeStarted;
     float timeHeld;
     float maxHoldTime = 0.5f;
     float calculatedJumpForce;
