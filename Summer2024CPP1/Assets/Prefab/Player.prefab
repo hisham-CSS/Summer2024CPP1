@@ -182,8 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc2fa21363bc0d46ad727ca966b0eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 1.8
   jumpForce: 10
+  audioSource: {fileID: 0}
   jumpClip: {fileID: 8300000, guid: b5c2f9fe3f80aa44b98a4fa533cb0dcc, type: 3}
   stompClip: {fileID: 8300000, guid: 0faf468bacc2a864a9d0045201a7d280, type: 3}
 --- !u!50 &7977471029706972853
@@ -201,7 +202,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2.59
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -377,8 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539510c4bee067c4d8a89534522ef969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 5
-  jumpFallForce: 100
+  jumpClip: {fileID: 8300000, guid: b5c2f9fe3f80aa44b98a4fa533cb0dcc, type: 3}
+  jumpHeight: 3
+  jumpFallForce: 10
 --- !u!1 &8802632242199537391
 GameObject:
   m_ObjectHideFlags: 0

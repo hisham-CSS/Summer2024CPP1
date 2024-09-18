@@ -11,7 +11,7 @@ public class GroundCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Creating groundcheck object
+        //Creating groundcheck object - assumes pivot is  bottom center
         if (!groundCheck)
         {
             GameObject obj = new GameObject();

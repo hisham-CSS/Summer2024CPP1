@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
     Animator anim;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     GroundCheck gndChk;
 
     //Audio Clip references
@@ -120,15 +120,18 @@ public class PlayerController : MonoBehaviour
             {
                 if (isGrounded)
                     rb.velocity = Vector2.zero;
-                //new Vector2(0, rb.velocity.y);
             }
             else
-                rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
+            {
+                if (hInput != 0 && Mathf.Abs(rb.velocity.x) < 4)
+                {
+                    rb.AddForce(new Vector2(hInput * 10, 0));
+                }
+            }
         }
 
 
         //Button Input Checks
-
         if (Input.GetButtonDown("Fire1"))
         {
             if (!isGrounded && curPlayingClips[0].clip.name != "JumpAttack")
@@ -143,8 +146,8 @@ public class PlayerController : MonoBehaviour
 
         //Sprite Flipping
         if (hInput != 0) sr.flipX = (hInput < 0);
-        //if (hInput > 0 && sr.flipX || hInput < 0 && !sr.flipX) sr.flipX = !sr.flipX;
 
+        //Animation setup
         anim.SetFloat("hInput", Mathf.Abs(hInput));
         anim.SetBool("isGrounded", isGrounded);
     }
@@ -167,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
     void IncreaseGravity()
     {
-        rb.gravityScale = 10;
+        rb.AddForce(Vector2.down * 100);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
