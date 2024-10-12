@@ -45,6 +45,7 @@ public class Jump : MonoBehaviour
         if (pc.IsGrounded && jumpBuffered)
         {
             jumpBuffered = false;
+            rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(0, calculatedJumpForce), ForceMode2D.Impulse);
             pc.audioSource.PlayOneShot(jumpClip);
         }
